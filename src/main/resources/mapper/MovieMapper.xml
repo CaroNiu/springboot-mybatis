@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.mybatis.mapper.MovieMapper">
+    <select id="findMovieByTitle" parameterType="String" resultType="com.springboot.mybatis.pojo.Movie">
+        SELECT * FROM test2.movie WHERE title=#{title}
+    </select>
+    <!--别名的使用测试，方式两种
+        1. 在SQL查询语句中替换-->
+    <select id="findMovieByIdFirst" parameterType="int" resultType="com.springboot.mybatis.pojo.Movie">
+        select movie_id id,directors dirors,title t,cover c,rate r,casts c from test2.movie where movie_id = #{id}
+    </select>
+
+    <!--别名测试
+        2.通过<resultMap>来映射字段名和实体类属性名 -->
+    <select id="queryMovieByIdSecond" parameterType="int" resultMap="movieAnthorName">
+        select * from test2.movie where movie_id = #{id}
+    </select>
+
+    <resultMap type="com.springboot.mybatis.pojo.Movie" id="movieAnthorName">
+        <!--用id标签映射主键 property实体类  column 数据库字段-->
+        <id property="id" column="movie_id"></id>
+    </resultMap>
+
+</mapper>

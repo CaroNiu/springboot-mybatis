@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>movie</title>
+</head>
+<body>
+<a href="/movie/Home">正常查询</a>
+<br>
+<a href="/movie/first/1">别名测试查询first</a>
+<br>
+<a href="/movie/second/2">别名测试查询second</a>
+
+<br>
+<!--取值-->
+<div>
+<h3 th:text="${movieOne}"></h3>
+</div>
+<br>
+<div>
+    <h2 th:text="${movieFirst}"></h2>
+</div>
+<br>
+<div>
+    <h2 th:text="${movieSecond}"></h2>
+</div>
+
+</body>
+</html>
