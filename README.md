@@ -1,0 +1,3 @@
+# springboot-mybatis
+Springboot整合mybatis
+测试mybatis表名与实体类中字段不一致的两种不同的配置方式
