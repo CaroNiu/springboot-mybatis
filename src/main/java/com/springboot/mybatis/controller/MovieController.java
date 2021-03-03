@@ -2,12 +2,11 @@ package com.springboot.mybatis.controller;
 
 import com.springboot.mybatis.pojo.Movie;
 import com.springboot.mybatis.service.IMovieService;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,31 +20,40 @@ public class MovieController {
     @Autowired
     private IMovieService movieService;
 
-    @RequestMapping("/")
+    @ApiModelProperty("主界面请求")
+    @GetMapping("/")
     public String openMovie(){
         return "movie";
     }
 
-    @RequestMapping("/movie/{title}")
-//    @ResponseBody
+    @ApiModelProperty("根据标题查询电影信息")
+    @GetMapping("/movie/{title}")
     public String findMovirByTitle(@PathVariable("title") String title, Model model){
         Movie movie = movieService.queryMovieByTitle(title);
         model.addAttribute("movieOne",movie);
         return "movie";
     }
 
-    @RequestMapping("/movie/first/{id}")
+    @ApiModelProperty("根据ID查询电影信息")
+    @GetMapping("/movie/first/{id}")
     public String findMovieByIdFirst(@PathVariable("id") Integer id,Model model){
         Movie movie = movieService.queryMovieByIdFirst(id);
         model.addAttribute("movieFirst",movie);
         return "movie";
     }
 
-    @RequestMapping("/movie/second/{id}")
+    @ApiModelProperty("根据Id查询电影")
+    @GetMapping("/movie/second/{id}")
     public String findMovieByIdSecond(@PathVariable("id") Integer id,Model model){
         Movie movie = movieService.queryMovieByIdSecond(id);
         model.addAttribute("movieSecond",movie);
         return "movie";
     }
 
+    @PostMapping("/favmovie")
+    @ResponseBody
+    public Movie getMoveiBytitle(String title){
+        Movie movie = movieService.queryMovieByTitle(title);
+        return movie;
+    }
 }
